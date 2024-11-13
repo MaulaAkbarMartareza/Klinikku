@@ -2,7 +2,7 @@
     "version": 2,
     "framework": null,
     "functions": {
-        "api/index.php": { "runtime": "vercel-php@0.6.0" }
+        "api/index.php": { "runtime": "vercel-php@0.5.3" }
     },
     "routes": [
         { "src": "/build/(.*)", "dest": "/public/build/" },
@@ -25,10 +25,11 @@
         "CACHE_DRIVER": "array",
         "LOG_CHANNEL": "stderr",
         "SESSION_DRIVER": "cookie",
-        "DB_CONNECTION": "mysql",
-        "DB_HOST": "4gg.h.filess.io",
-        "DB_PORT": "3306",
-        "DB_DATABASE": "db2024_stormtorn",
-        "DB_USERNAME": "db2024_stormtorn"
+        "DB_CONNECTION": "mysql", 
+        "DB_HOST": "x0twy.h.filess.io",           
+        "DB_PORT": "3307",                          
+        "DB_DATABASE": "klinik_breatheare",          
+        "DB_USERNAME": "klinik_breatheare",        
+        "DB_PASSWORD": "950d1bdb5461ed848aad07b4a0a216a0902d7c05" 
     }
 }

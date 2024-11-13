@@ -21,35 +21,25 @@
     <!-- Quick Actions -->
     <div class="row mb-4">
         <div class="col-12">
-            <div class="card border-0 shadow-lg">
-                <div class="card-body p-4">
-                    <h4 class="card-title mb-4 text-dark">
-                        <i class="ti ti-bolt fs-3 me-2"></i>Aksi Cepat
-                    </h4>
-                    <div class="quick-actions-grid">
-                        @php
-                        $actions = [
-                            ['route' => 'patients.create', 'icon' => 'ti-user-plus', 'title' => 'Tambah Pasien', 'desc' => 'Daftarkan pasien baru', 'color' => '#4e73df'],
-                            ['route' => 'appointments.create', 'icon' => 'ti-calendar-plus', 'title' => 'Buat Janji', 'desc' => 'Atur jadwal konsultasi', 'color' => '#1cc88a'],
-                            ['route' => 'reports.daily', 'icon' => 'ti-report', 'title' => 'Laporan Harian', 'desc' => 'Lihat statistik hari ini', 'color' => '#36b9cc'],
-                            ['route' => 'inventory.check', 'icon' => 'ti-medicine', 'title' => 'Cek Stok Obat', 'desc' => 'Kelola inventaris obat', 'color' => '#f6c23e'],
-                            ['route' => 'services.index', 'icon' => 'ti-heartbeat', 'title' => 'Layanan', 'desc' => 'Lihat daftar layanan', 'color' => '#e74a3b'],
-                            ['route' => 'doctors.schedule', 'icon' => 'ti-calendar-time', 'title' => 'Jadwal Dokter', 'desc' => 'Lihat jadwal praktik', 'color' => '#858796']
-                        ];
-                        @endphp
-                        
-                        @foreach ($actions as $action)
-                            <a href="{{ route($action['route']) }}" class="quick-action-card" style="--card-color: {{ $action['color'] }}">
-                                <div class="icon-wrapper">
-                                    <i class="{{ $action['icon'] }}"></i>
-                                </div>
-                                <h5>{{ $action['title'] }}</h5>
-                                <p>{{ $action['desc'] }}</p>
-                                <div class="hover-effect"></div>
-                            </a>
-                        @endforeach
+            <h4 class="text-dark"><i class="ti ti-bolt fs-3 me-2"></i>Aksi Cepat</h4>
+            <div class="d-flex flex-wrap gap-3">
+                @foreach ([
+                    ['route' => 'patients.create', 'icon' => 'ti-user-plus', 'title' => 'Tambah Pasien', 'desc' => 'Daftarkan pasien baru', 'class' => 'btn-primary'],
+                    ['route' => 'appointments.create', 'icon' => 'ti-calendar-plus', 'title' => 'Buat Janji', 'desc' => 'Atur jadwal konsultasi', 'class' => 'btn-success'],
+                    ['route' => 'reports.daily', 'icon' => 'ti-report', 'title' => 'Laporan Harian', 'desc' => 'Lihat statistik hari ini', 'class' => 'btn-info text-white'],
+                    ['route' => 'inventory.check', 'icon' => 'ti-medicine', 'title' => 'Cek Stok Obat', 'desc' => 'Kelola inventaris obat', 'class' => 'btn-warning'],
+                    ['route' => 'services.index', 'icon' => 'ti-heartbeat', 'title' => 'Layanan', 'desc' => 'Lihat daftar layanan', 'class' => 'btn-danger'],
+                    ['route' => 'doctors.schedule', 'icon' => 'ti-calendar-time', 'title' => 'Jadwal Dokter', 'desc' => 'Lihat jadwal praktik', 'class' => 'btn-secondary'],
+                    ['route' => 'shifts.index', 'icon' => 'ti-clock', 'title' => 'Jadwal Shift', 'desc' => 'Atur shift karyawan', 'class' => 'btn-light']
+                ] as $action)
+                    <div class="action-button">
+                        <a href="{{ route($action['route']) }}" class="btn {{ $action['class'] }} btn-lg rounded-pill shadow">
+                            <i class="{{ $action['icon'] }} fs-4 me-2"></i>
+                            {{ $action['title'] }}
+                            <small class="d-block text-white-50 mt-1">{{ $action['desc'] }}</small>
+                        </a>
                     </div>
-                </div>
+                @endforeach
             </div>
         </div>
     </div>
@@ -193,6 +183,10 @@
 </div>
 
 <style>
+.action-button {
+    margin: 10px 0; /* Tambahkan margin untuk menciptakan jarak antar tombol */
+}
+
 .card {
     transition: all 0.3s ease;
     border-radius: 1rem;
@@ -263,100 +257,6 @@
     background: rgba(255, 255, 255, 0.9);
     backdrop-filter: blur(10px);
     border-top: 1px solid rgba(0, 0, 0, 0.05);
-}
-
-.quick-actions-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 1.5rem;
-    padding: 0.5rem;
-}
-
-.quick-action-card {
-    position: relative;
-    background: white;
-    padding: 1.5rem;
-    border-radius: 1rem;
-    text-decoration: none;
-    color: #444;
-    transition: all 0.3s ease;
-    border: 1px solid #eee;
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-}
-
-.quick-action-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-    color: white;
-}
-
-.quick-action-card::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: var(--card-color);
-    opacity: 0;
-    transition: opacity 0.3s ease;
-    z-index: 1;
-}
-
-.quick-action-card:hover::before {
-    opacity: 0.95;
-}
-
-.quick-action-card .icon-wrapper {
-    width: 60px;
-    height: 60px;
-    background: var(--card-color);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 1rem;
-    transition: all 0.3s ease;
-}
-
-.quick-action-card .icon-wrapper i {
-    font-size: 1.5rem;
-    color: white;
-}
-
-.quick-action-card h5 {
-    margin: 0;
-    font-weight: 600;
-    font-size: 1.1rem;
-    position: relative;
-    z-index: 2;
-}
-
-.quick-action-card p {
-    margin: 0.5rem 0 0;
-    font-size: 0.9rem;
-    opacity: 0.8;
-    position: relative;
-    z-index: 2;
-}
-
-.hover-effect {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
-    background: radial-gradient(circle at center, rgba(255,255,255,0.2) 0%, transparent 70%);
-    transition: opacity 0.3s ease;
-    z-index: 2;
-}
-
-.quick-action-card:hover .hover-effect {
-    opacity: 0;
 }
 </style>
 
